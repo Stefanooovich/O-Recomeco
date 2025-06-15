@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Recomeço</title>
+    <link href="https://fonts.googleapis.com/css2?family=Badger+Super+Heavy&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #2e2e2e;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+        }
+
+
+        h1.site-title {
+            font-family: 'Badger Super Heavy', Arial, sans-serif;
+            font-size: 2.5em;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            margin: 10px;
+            background: #3a3a3a;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        }
+
+
+        .hidden {
+            display: none;
+        }
+
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: #2e2e2e;
+            color: #fff;
+        }
+
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #009929;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+
+        button:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="site-title">O Recomeço</h1>
+
+
+    <!-- Página de Dados do Personagem -->
+    <div id="pageCharacterData" class="container">
+        <label for="characterName">Nome do Personagem:</label>
+        <input id="characterName" type="text">
+
+
+        <label for="playerName">Nome do Jogador:</label>
+        <input id="playerName" type="text">
+
+
+        <label for="characterAge">Idade do Personagem (20 a 40):</label>
+        <input id="characterAge" type="number" min="20" max="40">
+        <label for="characterClass">Classe do Personagem:</label>
+        <select id="characterClass">
+            <option value="">Selecione...</option>
+            <option value="Batedor">Batedor</option>
+            <option value="Engenhoqueiro">Engenhoqueiro</option>
+            <option value="Cuidador">Cuidador</option>
+            <option value="Mercador/Negociante">Mercador/Negociante</option>
+            <option value="Abelha">Abelha</option>
+            <option value="Mundano">Mundano</option>
+            <option value="Mestre">Mestre</option>
+        </select>
+
+
+        <label id="mestreLabel" class="hidden" for="mestreField">Senha para Mestre:</label>
+        <input id="mestreField" class="hidden" type="password">
+
+
+        <button id="nextButton" disabled>Avançar ➞</button>
+    </div>
+
+
+    <!-- Página de Desfecho -->
+    <div id="pageEnd" class="container hidden">
+        <h2>Desfecho</h2>
+        <p>Selecione uma Campanha:</p>
+        <label for="campaign">Campanha Disponível:</label>
+        <select id="campaign">
+            <option value="">Selecione...</option>
+            <option value="Recomeço">Recomeço</option>
+        </select>
+
+
+        <label for="campaignCode">Insira o código da campanha:</label>
+        <input id="campaignCode" type="text" placeholder="Código da Campanha">
+
+
+        <button id="finishButton" disabled>Entrar na Campanha</button>
+    </div>
+
+
+    <script>
+        const campaign = document.getElementById('campaign');
+        const campaignCode = document.getElementById('campaignCode');
+        const finishButton = document.getElementById('finishButton');
+
+
+        campaign.addEventListener('change', validateCampaign);
+        campaignCode.addEventListener('input', validateCampaign);
+
+
+        function validateCampaign() {
+            if (campaign.value === "Recomeço" && campaignCode.value.toUpperCase() === "C4NA2N") {
+                finishButton.disabled = false;
+            } else {
+                finishButton.disabled = true;
+            }
+        }
+
+
+        finishButton.addEventListener('click', () => {
+            alert("Bem-vindo à Campanha Recomeço!"); // Redirecione conforme necessário
+        });
+
+
+        function showPage(num) {
+            document.getElementById('pageCharacterData').classList.toggle('hidden', num !== 1);
+            document.getElementById('pageEnd').classList.toggle('hidden', num !== 4);
+        }
+
+
+        showPage(1); // Exibir a primeira página
+    </script>
+</body>
+</html>
